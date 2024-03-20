@@ -1,31 +1,11 @@
 name: Publish Package to GitHub NPM Registry
 
 on: 
-  release: 
-    types: published
+  ????: 
     
 jobs:
-    unit-testing:
+    npm-package:
       runs-on: ubuntu-latest
-      permissions:
-        packages: write
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
-
-        - name: Setup NodeJS Version - 20.x
-          uses: actions/setup-node@v4
-          with:
-            node-version: '20.x'
-            registry-url: 'https://npm.pkg.github.com/' # Setup .npmrc file to publish to GitHub Packages
-
-        - name: Read .npmrc file contents
-          run: cat /home/runner/work/_temp/.npmrc
-        
-        - name: Install Dependencies
-          run: npm install
-        
-        - name: Publish to GitHub Packages
-          run: npm publish            
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
